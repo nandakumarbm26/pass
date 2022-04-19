@@ -1,0 +1,70 @@
+{
+  "name": "explorasi-1",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
+    "@mui/styled-engine-sc": "^5.4.1",
+    "@mui/styles": "^5.4.1",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "animejs": "^3.2.1",
+    "aos": "^3.0.0-beta.6",
+    "bootstrap": "^4.6.0",
+    "gsap": "^3.6.0",
+    "jquery": "^3.5.1",
+    "jquery.ripples": "^0.6.3",
+    "kinet": "^2.2.1",
+    "popper.js": "^1.16.1",
+    "pure-parallaxify": "^0.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+ "axios": "^0.25.0",
+    "react-redux": "^7.2.6",
+    "react-jquery-plugin": "^1.1.7",
+    "react-particles-js": "^3.4.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-scroll": "^1.8.2",
+    "react-slick": "^0.28.1",
+"react-share": "^4.4.0",
+    "react-webcam": "^6.0.1",
+    "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.3",
+    "react-smooth-scrolling": "^1.0.2",
+    "react-water-wave": "^1.0.5",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

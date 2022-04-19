@@ -1,0 +1,126 @@
+.wrapper {
+  &__navbar {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    transition: 0.5s;
+
+    &.fixed {
+      position: fixed !important;
+      width: 100%;
+      z-index: 999;
+    }
+
+    &.active {
+      background-color: color("purple");
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+.navbar__menu {
+  @media screen and(max-width: $br-md) {
+    &.collapse:not(.show) {
+      display: inline-block;
+      width: 100%;
+    }
+  }
+  &.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @media screen and(max-width: $br-md) {
+      position: initial;
+      top: initial;
+      left: initial;
+      transform: initial;
+    }
+  }
+
+  ul {
+    margin: 0 -20px;
+    @media screen and(max-width: $br-md) {
+      &.navbar-nav {
+        position: fixed;
+        left: 0;
+        top: -100%;
+        background-color: #a2d5f2;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        padding: 6.5rem 1rem;
+        margin: 0 !important;
+        padding-bottom: 2rem;
+        transition: 0.5s;
+      }
+    }
+    li {
+      padding: 0 20px;
+      .nav-link {
+        transition: 0.5s;
+        position: relative;
+        padding: 0.2rem 1rem;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+
+        @media screen and(max-width: $br-md) {
+          text-transform: uppercase;
+          font-size: 24px !important;
+          margin-bottom: 1.3rem;
+        }
+      }
+    }
+  }
+}
+
+.navbar__toogle {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 99;
+  border-radius: 50%;
+  background: #fafafa24;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px;
+
+  span {
+    display: inline-block;
+    width: 21px;
+    height: 2px;
+    background-color: white;
+    transition: 0.5s;
+  }
+
+  &[aria-expanded="true"] {
+    span {
+      &:nth-child(1) {
+        position: absolute;
+        transform: rotate(45deg);
+      }
+      &:nth-child(2) {
+        display: none;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+
+    ~ .navbar__menu {
+      ul {
+        top: 0;
+      }
+    }
+  }
+}
+
+.hr {
+  &__menu {
+    margin: 2rem 0;
+    border-top: 1px solid #fafafa4d;
+  }
+}
