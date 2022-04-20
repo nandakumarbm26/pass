@@ -1,7 +1,7 @@
 import { Modal, Button, Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-function InstructionModal({ childern, openStatus, height, width }) {
+function InstructionModal({ childern, openStatus }) {
   const [open, setOpen] = useState(openStatus);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -10,8 +10,7 @@ function InstructionModal({ childern, openStatus, height, width }) {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: width,
-    minHeight: height,
+    minHeight: "100vh",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,

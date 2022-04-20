@@ -8,7 +8,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
-
+import { makeStyles } from "@mui/styles";
 import { StepContent } from "@mui/material";
 import Capture from "../../aequm/components/Capture";
 import Centerpane from "../../aequm/components/Centerpane";
@@ -17,8 +17,14 @@ import { useRef, useEffect, useState } from "react";
 import InstructionPage from "./InstructionPage";
 
 const steps = ["Take Photo", "Check", "Payment"];
+const useStyles = makeStyles((theme) => ({
+  left: {
+    backgroundColor: theme.palette.secondary.light,
+  },
+}));
 
 export default function HorizontalLinearStepper() {
+  const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const webRef = useRef();
@@ -75,14 +81,13 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
   return (
-    <Stack
-      sx={{ width: "100%", padding: "3vh" }}
-      flexDirection={{ sm: "row", xs: "column" }}
-    >
+    <Stack flexDirection={{ sm: "row", xs: "column" }}>
       <Box
+        className={classes.left}
         sx={{
-          width: { sm: "40%", xs: "100%" },
-          minHeight: { sm: "100vh", xs: "25vh" },
+          width: { sm: "40vw", xs: "100vw" },
+          minHeight: { sm: "100vh", xs: "40vh" },
+          padding: 5,
         }}
       >
         <Stepper activeStep={activeStep} orientation={orientation}>
@@ -106,7 +111,6 @@ export default function HorizontalLinearStepper() {
             </StepContent> */}
           </Step>
         </Stepper>
-
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>
@@ -145,8 +149,9 @@ export default function HorizontalLinearStepper() {
       </Box>
       <Box
         sx={{
-          width: { sm: "60%", xs: "100%" },
-          minHeight: { sm: "100vh", xs: "75vh" },
+          width: { sm: "60vw", xs: "100vw" },
+          minHeight: { sm: "100vh", xs: "60vh" },
+          padding: 5,
         }}
       >
         {activeStep === 0 && <InstructionPage />}
