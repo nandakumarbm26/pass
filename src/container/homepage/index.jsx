@@ -312,11 +312,10 @@ export default class index extends Component {
                   </h1>
                   <p className="lh-2 semi-bold font__size--14 text__14-1024 color__black opacity__5">
                     We have various advantages and conveniences that we offer
-                    you as the best musical <br className="d-none d-md-block" />{" "}
-                    instrument rental place and we make sure you are happy for
-                    it
+                    you as the best Photo <br className="d-none d-md-block" />{" "}
+                    for Visa and Passport requirements.
                   </p>
-
+                  {/* 
                   <div className="row justify-content-center mt-5">
                     <div className="col-xl-10">
                       <div className="row justify-content-center">
@@ -361,7 +360,7 @@ export default class index extends Component {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
