@@ -50,7 +50,7 @@ const style = {
 };
 //http://127.0.0.1:5000/passport
 //https://gapi.aequmindia.in/api/passport
-export const URI = "http://127.0.0.1:5000/passport";
+export const URI = "https://gapi.aequmindia.in/api/passport";
 function Centerpane({ height, webRef }) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.store);

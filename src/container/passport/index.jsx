@@ -1,15 +1,20 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import {
+  Stack,
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Typography,
+} from "@mui/material";
+
 import { StepContent } from "@mui/material";
 import Capture from "../../aequm/components/Capture";
 import Centerpane from "../../aequm/components/Centerpane";
 import InstructionModal from "../../component/InstructionModal";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import InstructionPage from "./InstructionPage";
 
 const steps = ["Take Photo", "Check", "Payment"];
 
@@ -17,6 +22,17 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const webRef = useRef();
+  const [orientation, setOrientation] = useState("");
+
+  useEffect(() => {
+    if (window.innerWidth < 767) {
+      setOrientation("Horizontal");
+    } else {
+      setOrientation("vertical");
+    }
+    console.log(orientation);
+  });
+
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -58,71 +74,84 @@ export default function HorizontalLinearStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
-
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        <Step key={"Take Photo"}>
-          <StepLabel>CapturePhoto</StepLabel>
-          <StepContent>
-            <Box sx={{ height: "50vh" }}>
-              <InstructionModal
-                openStatus={true}
-                childern={<Centerpane webRef={webRef} />}
-              ></InstructionModal>
+    <Stack
+      sx={{ width: "100%", padding: "3vh" }}
+      flexDirection={{ sm: "row", xs: "column" }}
+    >
+      <Box
+        sx={{
+          width: { sm: "40%", xs: "100%" },
+          minHeight: { sm: "100vh", xs: "25vh" },
+        }}
+      >
+        <Stepper activeStep={activeStep} orientation={orientation}>
+          <Step key={"instructions"}>
+            <StepLabel>Instructions</StepLabel>
+            {/* <StepContent>
+              <Box sx={{ height: "50vh" }}>Hello world</Box>
+            </StepContent> */}
+          </Step>
+          <Step key={"validate"}>
+            <StepLabel>Take Photo</StepLabel>
+
+            {/* <StepContent>
+              <Box sx={{ height: "50vh" }}><Capture /></Box>
+            </StepContent> */}
+          </Step>
+          <Step key={"purchase"}>
+            <StepLabel>Purchase</StepLabel>
+            {/* <StepContent>
+              <Box sx={{ height: "50vh" }}></Box>
+            </StepContent> */}
+          </Step>
+        </Stepper>
+
+        {activeStep === steps.length ? (
+          <React.Fragment>
+            <Typography sx={{ mt: 2, mb: 1 }}>
+              All steps completed - you&apos;re finished
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Box sx={{ flex: "1 1 auto" }} />
+              <Button onClick={handleReset}>Reset</Button>
             </Box>
-          </StepContent>
-        </Step>
-        <Step key={"validate"}>
-          <StepLabel>Validation</StepLabel>
-
-          <StepContent>
-            <Box sx={{ height: "50vh" }}>{/* <Capture /> */}</Box>
-          </StepContent>
-        </Step>
-        <Step key={"purchase"}>
-          <StepLabel>Purchase</StepLabel>
-          <StepContent>
-            <Box sx={{ height: "50vh" }}>{/* <Capture /> */}</Box>
-          </StepContent>
-        </Step>
-      </Stepper>
-
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1 }}
+              >
+                Back
               </Button>
-            )}
+              <Box sx={{ flex: "1 1 auto" }} />
+              {isStepOptional(activeStep) && (
+                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                  Skip
+                </Button>
+              )}
 
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Box>
-        </React.Fragment>
-      )}
-    </Box>
+              <Button onClick={handleNext}>
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
+            </Box>
+          </React.Fragment>
+        )}
+      </Box>
+      <Box
+        sx={{
+          width: { sm: "60%", xs: "100%" },
+          minHeight: { sm: "100vh", xs: "75vh" },
+        }}
+      >
+        {activeStep === 0 && <InstructionPage />}
+        {activeStep === 1 && <Centerpane webRef={webRef} />}{" "}
+      </Box>
+    </Stack>
   );
 }

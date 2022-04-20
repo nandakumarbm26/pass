@@ -256,7 +256,7 @@ export default class index extends Component {
                       ePhoto world for passport and visa
                     </p>
                     <div className="wrapper__box-price wrap__flex-sm-50 text-center text-md-left d-flex justify-content-between align-items-center">
-                      <div className="list grid mb-4 mb-md-0">
+                      <div className="list grid mb-4 sm-12 mb-md-0">
                         <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
                           Country
                         </h5>
@@ -267,7 +267,7 @@ export default class index extends Component {
                           </select>
                         </h4>
                       </div>
-                      <div className="list grid mb-4 mb-md-0">
+                      <div className="list grid mb-4 sm-12 mb-md-0">
                         <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
                           Requirement
                         </h5>
