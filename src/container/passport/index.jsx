@@ -10,9 +10,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { StepContent } from "@mui/material";
-import Capture from "../../aequm/components/Capture";
 import Centerpane from "../../aequm/components/Centerpane";
-import InstructionModal from "../../component/InstructionModal";
 import { useRef, useEffect, useState } from "react";
 import InstructionPage from "./InstructionPage";
 
@@ -153,6 +151,7 @@ export default function HorizontalLinearStepper() {
           minHeight: { sm: "100vh", xs: "60vh" },
           padding: 5,
         }}
+        className={classes.left}
       >
         {activeStep === 0 && <InstructionPage />}
         {activeStep === 1 && <Centerpane webRef={webRef} />}{" "}

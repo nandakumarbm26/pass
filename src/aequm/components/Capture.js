@@ -26,7 +26,7 @@ function Capture({ webRef }) {
         mirrored={true}
         videoConstraints={videoConstraints}
         className={classes.camera}
-        screenshotFormat="image/png"
+        screenshotFormat="image/jpeg"
       />
     </Box>
   );

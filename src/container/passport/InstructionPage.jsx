@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   box1: {
     backgroundColor: theme.palette.secondary.light,
     width: "100%",
-    minHeight: "inherit",
+    minHeight: "100%",
     padding: "2vh",
   },
   instruction: {

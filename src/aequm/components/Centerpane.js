@@ -97,7 +97,7 @@ function Centerpane({ height, webRef }) {
             //https://gapi.aequmindia.in/api/passport
             onClick={() => {
               axios
-                .post("http://127.0.0.1:5000/passport", {
+                .post("https://gapi.aequmindia.in/api/passport", {
                   face: state.photo,
                 })
                 .then((res) => {
