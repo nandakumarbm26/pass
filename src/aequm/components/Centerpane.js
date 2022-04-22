@@ -60,20 +60,33 @@ function Centerpane({ height, webRef }) {
     // setFace(webRef.current.getScreenshot().split(",")[1]);
     dispatch(setPhoto(webRef.current.getScreenshot().split(",")[1]));
   };
-
+  const process = () => {
+    axios
+      .post("https://gapi.aequmindia.in/api/passport", {
+        face: state.photo,
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(setPhoto(res.data));
+      });
+  };
   return (
     <>
       <Box className={classes.border} sx={{ minHeight: "100%", width: "100%" }}>
         {state.photo == "" ? (
           <Capture webRef={webRef} />
         ) : (
-          <img src={"data:image/webp;base64," + state.photo} />
+          <img src={"data:image/jpeg;base64," + state.photo} />
         )}
       </Box>
       <Grid
         container
         columnSpacing={2}
-        sx={{ display: { xs: "none", sm: "flex" }, marginTop: "1vh" }}
+        sx={{
+          display: { xs: "flex" },
+          justifyContent: "space-around",
+          marginTop: "1vh",
+        }}
       >
         <Grid item sm={6}>
           <Button
@@ -95,16 +108,7 @@ function Centerpane({ height, webRef }) {
             disabled={state.photo == ""}
             // http://127.0.0.1:5000/passport  localhost api uri
             //https://gapi.aequmindia.in/api/passport
-            onClick={() => {
-              axios
-                .post("https://gapi.aequmindia.in/api/passport", {
-                  face: state.photo,
-                })
-                .then((res) => {
-                  console.log(res.data);
-                  dispatch(setPhoto(res.data));
-                });
-            }}
+            onClick={process}
           >
             Process
           </Button>
