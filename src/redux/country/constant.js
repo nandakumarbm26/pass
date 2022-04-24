@@ -8,8 +8,8 @@ export const USAParams = {
 };
 
 export const UKParams = {
-  height: 170.07874016,
-  width: 132.28346457,
+  height: 960,
+  width: 720,
 };
 
 export const SET_PHOTO = "SET_PHOTO";
