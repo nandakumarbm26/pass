@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   box1: {
@@ -18,9 +19,17 @@ const useStyles = makeStyles((theme) => ({
 
 function InstructionPage() {
   const classes = useStyles();
-
+  const state = useSelector((state) => state.store);
   return (
     <Box className={classes.box1}>
+      <Box>
+        <Typography variant="h6">
+          Country : <span style={{ color: "red" }}>{state.country}</span>
+        </Typography>
+        <Typography variant="h6">
+          Requirement :<span style={{ color: "red" }}>{state.requirement}</span>
+        </Typography>
+      </Box>
       <Typography variant="h4">Instructions</Typography>
       <Grid container>
         <Grid item className={classes.instruction} sm={12}>

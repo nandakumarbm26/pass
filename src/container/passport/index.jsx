@@ -47,7 +47,7 @@ export default function HorizontalLinearStepper() {
       setOrientation("vertical");
     }
     console.log(orientation);
-  });
+  }, []);
 
   const isStepOptional = (step) => {
     return step === 1;
@@ -103,9 +103,6 @@ export default function HorizontalLinearStepper() {
         <Stepper activeStep={activeStep} orientation={orientation}>
           <Step key={"instructions"}>
             <StepLabel>Instructions</StepLabel>
-            {/* <StepContent>
-              <Box sx={{ height: "50vh" }}>Hello world</Box>
-            </StepContent> */}
           </Step>
           <Step key={"validate"}>
             <StepLabel>Take Photo</StepLabel>
@@ -115,7 +112,7 @@ export default function HorizontalLinearStepper() {
             </StepContent> */}
           </Step>
           <Step key={"purchase"}>
-            <StepLabel>Purchase</StepLabel>
+            <StepLabel>Download</StepLabel>
             {/* <StepContent>
               <Box sx={{ height: "50vh" }}></Box>
             </StepContent> */}
@@ -187,7 +184,7 @@ export default function HorizontalLinearStepper() {
               sx={{ margin: "2vh" }}
               onClick={() => document.getElementById("download").click()}
             >
-              Download
+              Buy Now
             </Button>
           </>
         )}

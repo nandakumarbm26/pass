@@ -30,7 +30,7 @@ function Capture({ webRef }) {
         mirrored={true}
         videoConstraints={videoConstraints}
         className={
-          window.innerWidth < 514 ? classes.cameraxs : classes.camerasma
+          window.innerWidth < 514 ? classes.cameraxs : classes.camerasm
         }
         screenshotFormat="image/jpeg"
       />

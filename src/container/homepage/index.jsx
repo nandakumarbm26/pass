@@ -1,15 +1,23 @@
-import React, { Component, Fragment, createRef } from "react";
+import React, { Component, Fragment, createRef, useRef } from "react";
 import { $ } from "react-jquery-plugin";
 import Slider from "react-slick";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import bg from "./travel.png";
-
+import { connect } from "react-redux";
+import { setCountry, getCountryParams } from "../../redux/country/action";
 import { Link } from "react-router-dom";
 import InstructionModal from "../../component/InstructionModal";
 import { Button } from "@mui/material";
 import PassportApp from "../passport/index";
-export default class index extends Component {
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCountry: (e) => dispatch(getCountryParams(toString(e))),
+  };
+};
+
+class index extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,6 +124,7 @@ export default class index extends Component {
         },
       ],
     };
+
     return (
       <Fragment>
         <div className="overflow-hidden">
@@ -261,7 +270,15 @@ export default class index extends Component {
                           Country
                         </h5>
                         <h4 className="bold font__size--18 text__18-1024 text__18-xs mb-0">
-                          <select id="Country" name="Country">
+                          <select
+                            id="Country"
+                            name="Country"
+                            onChange={(e) => {
+                              this.props
+                                .getCountry("US")
+                                .catch((err) => console.log(err));
+                            }}
+                          >
                             <option value="US">United States of America</option>
                             <option value="UK">United Kingdom</option>
                           </select>
@@ -272,7 +289,11 @@ export default class index extends Component {
                           Requirement
                         </h5>
                         <h4 className="bold font__size--18 text__18-1024 text__18-xs mb-0">
-                          <select id="Country" name="Country">
+                          <select
+                            id="Country"
+                            name="Country"
+                            onChange={(e) => console.log(e.target.value)}
+                          >
                             <option value="passport">Passport</option>
                             <option value="visa">Visa</option>
                             <option value="passvisa">Passport + Visa</option>
@@ -370,3 +391,4 @@ export default class index extends Component {
     );
   }
 }
+export default connect(null, mapDispatchToProps)(index);
