@@ -9,7 +9,7 @@ import InstructionModal from "../../component/InstructionModal";
 import { Button } from "@mui/material";
 import PassportApp from "../passport/index";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Grid } from "@mui/material";
 export default function Index2(props) {
   const state = useSelector((state) => state.store);
   const dispatch = useDispatch();
@@ -151,8 +151,12 @@ export default function Index2(props) {
                     <br className="d-none d-lg-block" />
                     ePhoto world for passport and visa
                   </p>
-                  <div className="wrapper__box-price wrap__flex-sm-50 text-center text-md-left d-flex justify-content-between align-items-center">
-                    <div className="list grid mb-4 sm-12 mb-md-0">
+                  <Grid
+                    container
+                    rowGap={2}
+                    className="wrapper__box-price wrap__flex-sm-50 text-center text-md-left d-flex justify-content-between align-items-center"
+                  >
+                    <Grid item sm={4} xs={12}>
                       <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
                         Country
                       </h5>
@@ -167,8 +171,8 @@ export default function Index2(props) {
                           <option value="UK">United Kingdom</option>
                         </select>
                       </h4>
-                    </div>
-                    <div className="list grid mb-4 sm-12 mb-md-0">
+                    </Grid>
+                    <Grid item sm={4} xs={12}>
                       <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
                         Requirement
                       </h5>
@@ -186,9 +190,8 @@ export default function Index2(props) {
                           </option>
                         </select>
                       </h4>
-                    </div>
-
-                    <div className="list grid">
+                    </Grid>
+                    <Grid sm={4} xs={12} item>
                       <Button
                         color="primary"
                         variant="contained"
@@ -204,8 +207,8 @@ export default function Index2(props) {
                           childern={<PassportApp />}
                         ></InstructionModal>
                       )}
-                    </div>
-                  </div>
+                    </Grid>
+                  </Grid>
                 </div>
               </div>
             </div>
