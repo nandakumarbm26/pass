@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Grid, Alert } from "@mui/material";
 import { makeStyles, styled } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { CameraAltOutlined } from "@mui/icons-material";
 import Capture from "./Capture";
 import axios from "axios";
 
-import { setPhoto } from "../../redux/country/action";
+import { cameraReq, setPhoto } from "../../redux/country/action";
 
 const useStyles = makeStyles((theme) => ({
   border: {
@@ -55,10 +55,14 @@ function Centerpane({ height, webRef }) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.store);
   const classes = useStyles();
-
+  const reCapture = () => {
+    dispatch(setPhoto(""));
+    dispatch(cameraReq(true));
+  };
   const capture = () => {
     // setFace(webRef.current.getScreenshot().split(",")[1]);
     dispatch(setPhoto(webRef.current.getScreenshot().split(",")[1]));
+    dispatch(cameraReq(false));
   };
   const process = () => {
     axios
@@ -72,7 +76,7 @@ function Centerpane({ height, webRef }) {
   };
   return (
     <>
-      <Box className={classes.border} sx={{ minHeight: "100%", width: "100%" }}>
+      <Box className={classes.border} sx={{ width: "100%" }}>
         {state.photo == "" ? (
           <Capture webRef={webRef} />
         ) : (
@@ -93,8 +97,9 @@ function Centerpane({ height, webRef }) {
             variant="contained"
             sx={{ width: "100%" }}
             startIcon={<CameraAltOutlined />}
+            disabled={!state.faceStats}
             onClick={() => {
-              state.photo == "" ? capture() : dispatch(setPhoto(""));
+              state.photo == "" ? capture() : reCapture();
             }}
           >
             {state.photo == "" ? "Capture" : "Try again"}
@@ -114,6 +119,7 @@ function Centerpane({ height, webRef }) {
           </Button>
         </Grid>
       </Grid>
+      {!state.faceStats && <Alert severity="warning">Face Not detected</Alert>}
     </>
   );
 }

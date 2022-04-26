@@ -4,16 +4,21 @@ import {
   Box,
   Stepper,
   Step,
+  Grid,
   StepLabel,
   Button,
   Typography,
 } from "@mui/material";
+import "aos/dist/aos.css";
+
 import { makeStyles } from "@mui/styles";
 import { StepContent } from "@mui/material";
 import Centerpane from "../../aequm/components/Centerpane";
 import { useRef, useEffect, useState } from "react";
 import InstructionPage from "./InstructionPage";
-import { useSelector, useStore } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setRequiremnets, getCountryParams } from "../../redux/country/action";
+
 const steps = ["Take Photo", "Check", "Payment"];
 const useStyles = makeStyles((theme) => ({
   left: {
@@ -33,13 +38,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function HorizontalLinearStepper() {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const state = useSelector((state) => state.store);
   const classes = useStyles();
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const webRef = useRef();
   const [orientation, setOrientation] = useState("");
-
+  const countryRef = useRef();
+  const requirementRef = useRef();
   useEffect(() => {
     if (window.innerWidth < 767) {
       setOrientation("Horizontal");
@@ -86,6 +95,20 @@ export default function HorizontalLinearStepper() {
       return newSkipped;
     });
   };
+  const handleClick = () => {
+    // Changing state
+    setOpen(!open);
+    console.log(state);
+  };
+
+  const countryUpdate = () => {
+    dispatch(getCountryParams(countryRef.current.value));
+  };
+
+  const updateRequirments = () => {
+    dispatch(setRequiremnets(requirementRef.current.value));
+    console.log(requirementRef.current.value);
+  };
 
   const handleReset = () => {
     setActiveStep(0);
@@ -103,6 +126,47 @@ export default function HorizontalLinearStepper() {
         <Stepper activeStep={activeStep} orientation={orientation}>
           <Step key={"instructions"}>
             <StepLabel>Instructions</StepLabel>
+            <StepContent>
+              <Grid
+                container
+                rowGap={2}
+                className="wrapper__box-price wrap__flex-sm-50 text-center text-md-left d-flex justify-content-between align-items-center"
+              >
+                <Grid item sm={4} xs={12}>
+                  <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
+                    Country
+                  </h5>
+                  <h4 className="bold font__size--18 text__18-1024 text__18-xs mb-0">
+                    <select
+                      id="Country"
+                      name="Country"
+                      ref={countryRef}
+                      onChange={countryUpdate}
+                    >
+                      <option value="US">United States of America</option>
+                      <option value="UK">United Kingdom</option>
+                    </select>
+                  </h4>
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                  <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
+                    Requirement
+                  </h5>
+                  <h4 className="bold font__size--18 text__18-1024 text__18-xs mb-0">
+                    <select
+                      ref={requirementRef}
+                      id="Country"
+                      name="Country"
+                      onChange={updateRequirments}
+                    >
+                      <option value="passport">Passport</option>
+                      <option value="visa">Visa</option>
+                      <option value="passport + visa">Passport + Visa</option>
+                    </select>
+                  </h4>
+                </Grid>
+              </Grid>
+            </StepContent>
           </Step>
           <Step key={"validate"}>
             <StepLabel>Take Photo</StepLabel>
@@ -132,14 +196,14 @@ export default function HorizontalLinearStepper() {
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
+              {/* <Button
                 color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
                 Back
-              </Button>
+              </Button> */}
               <Box sx={{ flex: "1 1 auto" }} />
 
               <Button
@@ -165,10 +229,7 @@ export default function HorizontalLinearStepper() {
         {activeStep === 0 && <InstructionPage />}
         {activeStep === 2 && (
           <>
-            <Box
-              className={classes.border}
-              sx={{ minHeight: "100%", width: "100%" }}
-            >
+            <Box className={classes.border} sx={{ width: "100%" }}>
               <img src={"data:image/jpeg;base64," + state.photo} />
             </Box>
             <a

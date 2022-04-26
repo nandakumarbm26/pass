@@ -12,7 +12,7 @@ export default function index() {
     <Fragment>
       <CssBaseline />
       <ThemeProvider theme={customTheme}>
-        <Router forceRefresh>
+        {/* <Router forceRefresh>
           <Switch>
             <Route exact path="/">
               <Homepage />
@@ -21,8 +21,8 @@ export default function index() {
               <Passport />
             </Route>
           </Switch>
-        </Router>
-        {/* <App /> */}
+        </Router> */}
+        <App />
       </ThemeProvider>
     </Fragment>
   );

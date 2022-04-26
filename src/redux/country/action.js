@@ -1,4 +1,12 @@
-import { USA, UK, SET_PHOTO, SET_COUNTRY, SET_REQUIREMENT } from "./constant";
+import {
+  USA,
+  UK,
+  SET_PHOTO,
+  CAMERA_REQ,
+  SET_COUNTRY,
+  SET_REQUIREMENT,
+  FACE_STATS,
+} from "./constant";
 
 export const getCountryParams = (country) => async (dispatch) => {
   console.log("action");
@@ -12,4 +20,11 @@ export const setPhoto = (image) => async (dispatch) => {
 
 export const setRequiremnets = (req) => async (dispatch) => {
   dispatch({ type: SET_REQUIREMENT, params: { req: req } });
+};
+
+export const cameraReq = (req) => async (dispatch) => {
+  dispatch({ type: CAMERA_REQ, params: { req: req } });
+};
+export const faceStats = (req) => async (dispatch) => {
+  dispatch({ type: FACE_STATS, params: { req: req } });
 };

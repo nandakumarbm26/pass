@@ -1,5 +1,12 @@
 import { USA, UK, SET_COUNTRY, SET_REQUIREMENT } from "./constant";
-import { USAParams, UKParams, SET_PHOTO } from "./constant";
+import {
+  USAParams,
+  UKParams,
+  LOADING,
+  FACE_STATS,
+  SET_PHOTO,
+  CAMERA_REQ,
+} from "./constant";
 import { getCountryParams } from "./action";
 
 const initialState = {
@@ -9,6 +16,9 @@ const initialState = {
   },
   requirement: "passport",
   photo: "",
+  captureVideo: true,
+  faceStats: false,
+  loading: false,
 };
 
 export default function store(state = initialState, action) {
@@ -40,6 +50,24 @@ export default function store(state = initialState, action) {
     case SET_REQUIREMENT: {
       console.log("requirement reducer : " + action.params.req);
       return { ...state, requirement: action.params.req };
+    }
+    case CAMERA_REQ: {
+      return {
+        ...state,
+        cameraReq: action.params.req,
+      };
+    }
+    case FACE_STATS: {
+      return {
+        ...state,
+        faceStats: action.params.req,
+      };
+    }
+    case LOADING: {
+      return {
+        ...state,
+        loading: action.params.req,
+      };
     }
     default:
       return state;
