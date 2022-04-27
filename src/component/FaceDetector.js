@@ -141,7 +141,7 @@ function App() {
   const state = useSelector((state) => state.store);
   const [modelsLoaded, setModelsLoaded] = React.useState(false);
   const [captureVideo, setCaptureVideo] = React.useState(false);
-
+  const [smile, setSmile] = React.useState(false);
   const videoRef = React.useRef();
   const videoHeight = 480;
   const videoWidth = 640;
@@ -175,7 +175,12 @@ function App() {
         console.error("error:", err);
       });
   };
-
+  useEffect(
+    () =>
+      smile &&
+      alert("Facial expression should be Neutral. Please do not Smile!"),
+    [smile]
+  );
   const handleVideoOnPlay = () => {
     setInterval(async () => {
       if (canvasRef && canvasRef.current) {
@@ -205,6 +210,9 @@ function App() {
         try {
           resizedDetections[0].landmarks._positions[27] &&
             dispatch(faceStats(true));
+          resizedDetections[0].expressions.neutral < 0.7
+            ? setSmile(true)
+            : setSmile(false);
         } catch (e) {
           dispatch(faceStats(false));
         }

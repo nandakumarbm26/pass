@@ -71,7 +71,11 @@ function Centerpane({ height, webRef }) {
       })
       .then((res) => {
         console.log(res.data);
-        dispatch(setPhoto(res.data));
+        dispatch(setPhoto(res.data["image"].split("'")[1]));
+        if (res.data["status"]) {
+          alert("Please remove specs and retake photo.");
+          dispatch(setPhoto(""));
+        }
       });
   };
   return (
