@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     borderStyle: "solid",
     padding: 5,
     borderWidth: 6,
-    borderColor: theme.palette.primary.main,
+    borderColor: theme.palette.black.main,
+    backgroundColor: theme.palette.primary.light,
     display: "flex",
     justifyContent: "center",
   },
@@ -123,7 +124,10 @@ function Centerpane({ height, webRef }) {
           </Button>
         </Grid>
       </Grid>
-      {!state.faceStats && <Alert severity="warning">Face Not detected</Alert>}
+      {!state.faceStats && (
+        <Alert severity="warning">Place your face within the grid</Alert>
+      )}
+      {/* {state.smile && <Alert severity="warning">Do not Smile</Alert>} */}
     </>
   );
 }

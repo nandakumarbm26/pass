@@ -10,6 +10,10 @@
     "@mui/styled-engine-sc": "^5.4.1",
     "@mui/styles": "^5.4.1",
     "@tensorflow-models/coco-ssd": "^2.2.2",
+    "@tensorflow-models/face-landmarks-detection": "^1.0.1",
+    "@tensorflow/tfjs-backend-webgl": "^3.16.0",
+    "@tensorflow/tfjs-converter": "^3.16.0",
+    "@tensorflow/tfjs-core": "^3.16.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -68,5 +72,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "blink-detection": "^1.2.1"
   }
 }

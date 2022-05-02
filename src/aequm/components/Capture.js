@@ -23,10 +23,10 @@ function Capture({ webRef }) {
     width: state.countryParams.width,
     height: state.countryParams.height,
   };
+  const margin = `0% ${((1 - state.countryParams.faceWidth) / 2) * 100}%`;
 
   return (
-    <Box>
-      <App />
+    <Box sx={{ position: "relative" }}>
       <Webcam
         ref={webRef}
         imageSmoothing={true}
@@ -37,6 +37,19 @@ function Capture({ webRef }) {
         }
         screenshotFormat="image/jpeg"
       />
+      <App />
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: "15%",
+          margin: margin,
+          minHeight: `${state.countryParams.faceHeight * 100}%`,
+          boxSizing: "border-box",
+          width: `${state.countryParams.faceWidth * 100}%`,
+          border: "10px solid lime",
+        }}
+      ></Box>
     </Box>
   );
 }

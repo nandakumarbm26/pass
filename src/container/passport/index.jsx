@@ -18,6 +18,7 @@ import { useRef, useEffect, useState } from "react";
 import InstructionPage from "./InstructionPage";
 import { useSelector, useDispatch } from "react-redux";
 import { setRequiremnets, getCountryParams } from "../../redux/country/action";
+import BlinkDetect from "../../component/BlinkDetect";
 
 const steps = ["Take Photo", "Check", "Payment"];
 const useStyles = makeStyles((theme) => ({
@@ -250,6 +251,7 @@ export default function HorizontalLinearStepper() {
           </>
         )}
         {activeStep === 1 && <Centerpane webRef={webRef} />}
+        {/* {activeStep === 1 && <BlinkDetect />} */}
       </Box>
     </Stack>
   );
