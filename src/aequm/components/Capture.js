@@ -35,7 +35,7 @@ function Capture({ webRef }) {
         className={
           window.innerWidth < 514 ? classes.cameraxs : classes.camerasm
         }
-        screenshotFormat="image/jpeg"
+        screenshotFormat="image/png"
       />
       <App />
 

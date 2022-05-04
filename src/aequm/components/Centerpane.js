@@ -85,7 +85,7 @@ function Centerpane({ height, webRef }) {
         {state.photo == "" ? (
           <Capture webRef={webRef} />
         ) : (
-          <img src={"data:image/jpeg;base64," + state.photo} />
+          <img src={"data:image/png;base64," + state.photo} />
         )}
       </Box>
       <Grid
