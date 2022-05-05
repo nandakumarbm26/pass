@@ -5,7 +5,7 @@ import { customTheme } from "./aequm/theme";
 import { CssBaseline } from "@mui/material";
 import Homepage from "./container/homepage/index2";
 import Passport from "./aequm/Aequm";
-import App from "./container/passport/index";
+import App from "./container/passport/Page";
 
 export default function index() {
   return (
