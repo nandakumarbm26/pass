@@ -46,7 +46,7 @@ function Page() {
           size="large"
           variant="contained"
           sx={{ width: "10vw" }}
-          disabled={page === 3}
+          disabled={page === 3 || (page === 2 && state.photo === "")}
           onClick={() => page <= 3 && setPage(page + 1)}
         >
           Next
@@ -158,7 +158,7 @@ function Page4() {
         >
           <img src={"data:image/png;base64," + state.processedPhoto} />
           <a
-            href={"data:image/jpeg;base64," + state.photo}
+            href={"data:image/jpeg;base64," + state.processedPhoto}
             download="myimage.jpg"
             style={{ display: "none" }}
             id="download"
