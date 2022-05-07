@@ -8,7 +8,7 @@ export const USAParams = {
   faceHeight: 0.7,
   faceWidth: 0.5,
 };
-
+export const PROCESS_PHOTO = "PROCESS_PHOTO";
 export const UKParams = {
   height: 170 * 3,
   width: 132 * 3,

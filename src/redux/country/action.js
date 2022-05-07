@@ -6,6 +6,7 @@ import {
   SET_COUNTRY,
   SET_REQUIREMENT,
   FACE_STATS,
+  PROCESS_PHOTO,
 } from "./constant";
 
 export const getCountryParams = (country) => async (dispatch) => {
@@ -14,10 +15,11 @@ export const getCountryParams = (country) => async (dispatch) => {
 };
 
 export const setPhoto = (image) => async (dispatch) => {
-  console.log(image);
   dispatch({ type: SET_PHOTO, params: { image: image } });
 };
-
+export const setProcessedPhoto = (image) => async (dispatch) => {
+  dispatch({ type: PROCESS_PHOTO, params: { image: image } });
+};
 export const setRequiremnets = (req) => async (dispatch) => {
   dispatch({ type: SET_REQUIREMENT, params: { req: req } });
 };

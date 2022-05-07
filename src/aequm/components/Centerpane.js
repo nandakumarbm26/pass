@@ -4,7 +4,6 @@ import { makeStyles, styled } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { CameraAltOutlined } from "@mui/icons-material";
 import Capture from "./Capture";
-import axios from "axios";
 
 import { cameraReq, setPhoto } from "../../redux/country/action";
 
@@ -52,7 +51,7 @@ const style = {
 //http://127.0.0.1:5000/passport
 //https://gapi.aequmindia.in/api/passport
 export const URI = "https://gapi.aequmindia.in/api/passport";
-function Centerpane({ height, webRef }) {
+function Centerpane({ height, webRef, status }) {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.store);
   const classes = useStyles();
@@ -65,30 +64,17 @@ function Centerpane({ height, webRef }) {
     dispatch(setPhoto(webRef.current.getScreenshot().split(",")[1]));
     dispatch(cameraReq(false));
   };
-  const process = () => {
-    axios
-      .post("https://gapi.aequmindia.in/api/passport", {
-        face: state.photo,
-      })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(setPhoto(res.data["image"].split("'")[1]));
-        if (res.data["status"]) {
-          alert("Please remove specs and retake photo.");
-          dispatch(setPhoto(""));
-        }
-      });
-  };
+
   return (
     <>
-      <Box className={classes.border} sx={{ width: "100%" }}>
+      <Box className={classes.border} style={{ width: "75vw", margin: "auto" }}>
         {state.photo == "" ? (
           <Capture webRef={webRef} />
         ) : (
           <img src={"data:image/png;base64," + state.photo} />
         )}
       </Box>
-      <Grid
+      {/* <Grid
         container
         columnSpacing={2}
         sx={{
@@ -96,21 +82,21 @@ function Centerpane({ height, webRef }) {
           justifyContent: "space-around",
           marginTop: "1vh",
         }}
+      > */}
+      {/* <Grid item sm={6}> */}
+      <Button
+        variant="contained"
+        sx={{ width: "20%", alignSelf: "center" }}
+        startIcon={<CameraAltOutlined />}
+        disabled={!state.faceStats}
+        onClick={() => {
+          state.photo == "" ? capture() : reCapture();
+        }}
       >
-        <Grid item sm={6}>
-          <Button
-            variant="contained"
-            sx={{ width: "100%" }}
-            startIcon={<CameraAltOutlined />}
-            disabled={!state.faceStats}
-            onClick={() => {
-              state.photo == "" ? capture() : reCapture();
-            }}
-          >
-            {state.photo == "" ? "Capture" : "Try again"}
-          </Button>
-        </Grid>
-        <Grid item sm={6}>
+        {state.photo == "" ? "Capture" : "Try again"}
+      </Button>
+      {/* </Grid> */}
+      {/* <Grid item sm={6}>
           <Button
             variant="contained"
             sx={{ width: "100%" }}
@@ -122,8 +108,8 @@ function Centerpane({ height, webRef }) {
           >
             Process
           </Button>
-        </Grid>
-      </Grid>
+        </Grid> */}
+      {/* </Grid> */}
       {!state.faceStats && (
         <Alert severity="warning">Place your face within the grid</Alert>
       )}
