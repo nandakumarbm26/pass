@@ -156,7 +156,11 @@ function Page4() {
             margin: "auto",
           }}
         >
-          <img src={"data:image/png;base64," + state.processedPhoto} />
+          <img
+            src={"data:image/jpeg;base64," + state.processedPhoto}
+            height={660}
+            width={660}
+          />
           <a
             href={"data:image/jpeg;base64," + state.processedPhoto}
             download="myimage.jpg"

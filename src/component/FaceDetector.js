@@ -98,7 +98,7 @@ function App() {
             resizedDetections[0].landmarks._positions[8].y <=
               constraints.yend &&
             resizedDetections[0].landmarks._positions[8].y >
-              constraints.yend - 10.0 &&
+              constraints.yend - 20.0 &&
             resizedDetections[0].landmarks._positions[19].y > constraints.ystart
           ) {
             dispatch(faceStats(true));
@@ -113,9 +113,7 @@ function App() {
         } catch (e) {
           dispatch(faceStats(false));
         }
-        canvasRef &&
-          canvasRef.current &&
-          faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+
         try {
           var slope =
             (resizedDetections[0].landmarks._positions[27].y -

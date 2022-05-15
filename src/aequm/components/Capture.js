@@ -42,7 +42,7 @@ function Capture({ webRef }) {
       <Box
         sx={{
           position: "absolute",
-          top: "15%",
+          top: "10%",
           margin: margin,
           minHeight: `${state.countryParams.faceHeight * 100}%`,
           boxSizing: "border-box",
