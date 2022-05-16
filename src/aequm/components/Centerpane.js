@@ -66,7 +66,14 @@ function Centerpane({ height, webRef, status }) {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        rowGap: "10px",
+      }}
+    >
       <Box className={classes.border} style={{ width: "75vw", margin: "auto" }}>
         {state.photo == "" ? (
           <Capture webRef={webRef} />
@@ -86,7 +93,7 @@ function Centerpane({ height, webRef, status }) {
       {/* <Grid item sm={6}> */}
       <Button
         variant="contained"
-        sx={{ width: "20%", alignSelf: "center" }}
+        sx={{ width: "20%", margin: "auto" }}
         startIcon={<CameraAltOutlined />}
         disabled={!state.faceStats}
         onClick={() => {
@@ -111,10 +118,12 @@ function Centerpane({ height, webRef, status }) {
         </Grid> */}
       {/* </Grid> */}
       {!state.faceStats && (
-        <Alert severity="warning">Place your face within the grid</Alert>
+        <Alert sx={{ margin: "auto" }} severity="warning">
+          Place your face within the grid
+        </Alert>
       )}
       {/* {state.smile && <Alert severity="warning">Do not Smile</Alert>} */}
-    </>
+    </Box>
   );
 }
 

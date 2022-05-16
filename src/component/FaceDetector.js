@@ -113,7 +113,10 @@ function App() {
         } catch (e) {
           dispatch(faceStats(false));
         }
-
+        // console.log(
+        //   resizedDetections[0].landmarks._positions[16].x -
+        //     resizedDetections[0].landmarks._positions[0].x
+        // );
         try {
           var slope =
             (resizedDetections[0].landmarks._positions[27].y -
