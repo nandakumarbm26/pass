@@ -98,7 +98,7 @@ function App() {
             resizedDetections[0].landmarks._positions[8].y <=
               constraints.yend &&
             resizedDetections[0].landmarks._positions[8].y >
-              constraints.yend - 20.0 &&
+              constraints.yend - 50.0 &&
             resizedDetections[0].landmarks._positions[19].y > constraints.ystart
           ) {
             dispatch(faceStats(true));
