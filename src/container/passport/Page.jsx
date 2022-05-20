@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Centerpane from "../../aequm/components/Centerpane";
 import InstructionPage from "./InstructionPage";
-import { Box, Button, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, Alert } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setRequiremnets,
@@ -123,9 +123,9 @@ function Page2() {
 function Page4() {
   const state = useSelector((state) => state.store);
   const dispatch = useDispatch();
+  const [shadow, setShadow] = useState(false);
   const [loading, setLoading] = useState("false");
   const process = () => {
-    console.log("photo" + state.photo);
     setLoading(true);
     if (state.photo !== "")
       axios
@@ -138,6 +138,9 @@ function Page4() {
           if (res.data["status"]) {
             alert("Please remove specs and retake photo.");
             dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
+          }
+          if (res.data["shadow"]) {
+            setShadow(true);
           }
           setLoading(false);
         });
@@ -156,10 +159,15 @@ function Page4() {
             margin: "auto",
           }}
         >
+          {shadow && (
+            <Alert sx={{ margin: "auto" }} severity="warning">
+              Please check lighting condition.
+            </Alert>
+          )}
           <img
             src={"data:image/jpeg;base64," + state.processedPhoto}
-            height={660}
-            width={660}
+            height={400}
+            width={400}
           />
           <a
             href={"data:image/jpeg;base64," + state.processedPhoto}
@@ -191,7 +199,7 @@ function LoadingProgress() {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column", margin: "auto" }}>
       {caption.map((text) => (
         <div style={{ display: "flex", flexDirection: "row" }}>
           <CircularProgress />

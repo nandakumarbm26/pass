@@ -74,6 +74,18 @@ function Centerpane({ height, webRef, status }) {
         rowGap: "10px",
       }}
     >
+      {" "}
+      <Button
+        variant="contained"
+        sx={{ width: "20%", margin: "auto" }}
+        startIcon={<CameraAltOutlined />}
+        disabled={!state.faceStats}
+        onClick={() => {
+          state.photo == "" ? capture() : reCapture();
+        }}
+      >
+        {state.photo == "" ? "Capture" : "Try again"}
+      </Button>
       <Box className={classes.border} style={{ width: "75vw", margin: "auto" }}>
         {state.photo == "" ? (
           <Capture webRef={webRef} />
@@ -91,17 +103,6 @@ function Centerpane({ height, webRef, status }) {
         }}
       > */}
       {/* <Grid item sm={6}> */}
-      <Button
-        variant="contained"
-        sx={{ width: "20%", margin: "auto" }}
-        startIcon={<CameraAltOutlined />}
-        disabled={!state.faceStats}
-        onClick={() => {
-          state.photo == "" ? capture() : reCapture();
-        }}
-      >
-        {state.photo == "" ? "Capture" : "Try again"}
-      </Button>
       {/* </Grid> */}
       {/* <Grid item sm={6}>
           <Button
