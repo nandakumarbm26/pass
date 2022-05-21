@@ -91,21 +91,24 @@ function App() {
         );
         try {
           if (
-            resizedDetections[0].landmarks._positions[0].x >
-              constraints.xstart &&
-            resizedDetections[0].landmarks._positions[16].x <
-              constraints.xend &&
-            resizedDetections[0].landmarks._positions[8].y <=
-              constraints.yend &&
-            resizedDetections[0].landmarks._positions[8].y >
-              constraints.yend - 50.0 &&
-            resizedDetections[0].landmarks._positions[19].y > constraints.ystart
+            resizedDetections[0].landmarks._positions[0]
+            // resizedDetections[0].landmarks._positions[0].x >
+            //   constraints.xstart &&
+            // resizedDetections[0].landmarks._positions[16].x <
+            //   constraints.xend &&
+            // resizedDetections[0].landmarks._positions[8].y <=
+            //   constraints.yend &&
+            // resizedDetections[0].landmarks._positions[8].y >
+            //   constraints.yend - 50.0 &&
+            // resizedDetections[0].landmarks._positions[19].y > constraints.ystart
           ) {
             dispatch(faceStats(true));
           } else {
             dispatch(faceStats(false));
           }
-        } catch (e) {}
+        } catch (e) {
+          dispatch(faceStats(false));
+        }
         try {
           resizedDetections[0].expressions.neutral < 0.7
             ? setSmile(true)

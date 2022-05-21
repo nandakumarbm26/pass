@@ -131,6 +131,7 @@ function Page4() {
       axios
         .post("https://gapi.aequmindia.in/api/passport", {
           face: state.photo,
+          country: state.country,
         })
         .then((res) => {
           console.log(res.data);
