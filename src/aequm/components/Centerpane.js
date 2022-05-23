@@ -4,6 +4,7 @@ import { makeStyles, styled } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { CameraAltOutlined } from "@mui/icons-material";
 import Capture from "./Capture";
+import App from "../../component/FaceDetector";
 
 import { cameraReq, setPhoto } from "../../redux/country/action";
 
@@ -52,6 +53,8 @@ const style = {
 //https://gapi.aequmindia.in/api/passport
 export const URI = "https://gapi.aequmindia.in/api/passport";
 function Centerpane({ height, webRef, status }) {
+  const videoRef = React.useRef();
+  const canvasRef = React.useRef();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.store);
   const classes = useStyles();
@@ -60,8 +63,17 @@ function Centerpane({ height, webRef, status }) {
     dispatch(cameraReq(true));
   };
   const capture = () => {
-    // setFace(webRef.current.getScreenshot().split(",")[1]);
-    dispatch(setPhoto(webRef.current.getScreenshot().split(",")[1]));
+    canvasRef.current
+      .getContext("2d")
+      .drawImage(
+        videoRef.current,
+        0,
+        0,
+        state.params.width,
+        state.params.height
+      );
+    let image_data_url = canvasRef.current.toDataURL("image/png");
+    dispatch(setPhoto(image_data_url.split(",")[1]));
     dispatch(cameraReq(false));
   };
 
@@ -88,7 +100,7 @@ function Centerpane({ height, webRef, status }) {
       </Button>
       <Box className={classes.border} style={{ width: "75vw", margin: "auto" }}>
         {state.photo == "" ? (
-          <Capture webRef={webRef} />
+          <App videoRef={videoRef} canvasRef={canvasRef} />
         ) : (
           <img src={"data:image/png;base64," + state.photo} />
         )}

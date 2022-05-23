@@ -5,7 +5,7 @@ import * as faceapi from "face-api.js";
 import React, { useEffect, useRef } from "react";
 import { Alert } from "@mui/material";
 
-function App() {
+function App({ videoRef, canvasRef }) {
   const open = useRef();
   const close = useRef();
   const dispatch = useDispatch();
@@ -14,10 +14,8 @@ function App() {
   const [captureVideo, setCaptureVideo] = React.useState(false);
   const [smile, setSmile] = React.useState(false);
   const [bent, setBent] = React.useState(false);
-  const videoRef = React.useRef();
   const videoHeight = state.countryParams.height;
   const videoWidth = state.countryParams.width;
-  const canvasRef = React.useRef();
 
   React.useEffect(() => {
     const loadModels = async () => {
@@ -32,7 +30,9 @@ function App() {
     loadModels();
     startVideo();
   }, []);
-
+  useEffect(() => {
+    state.photo != "" ? closeWebcam() : startVideo();
+  }, [state]);
   const startVideo = () => {
     setCaptureVideo(true);
     navigator.mediaDevices
@@ -154,7 +154,7 @@ function App() {
           face should be straight
         </Alert>
       )}
-      <div style={{ display: "none" }}>
+      <div style={{ maxHeight: "70vh", maxWidth: "100vw" }}>
         {captureVideo ? (
           modelsLoaded ? (
             <div>
@@ -163,6 +163,8 @@ function App() {
                   display: "flex",
                   justifyContent: "center",
                   padding: "10px",
+                  maxHeight: "70vh",
+                  maxWidth: "100vw",
                 }}
               >
                 <video

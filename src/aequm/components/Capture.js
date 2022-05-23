@@ -37,7 +37,7 @@ function Capture({ webRef }) {
         }
         screenshotFormat="image/png"
       />
-      <App />
+      <App webRef={webRef} />
 
       <Box
         sx={{

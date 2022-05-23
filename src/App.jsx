@@ -6,6 +6,7 @@ import { CssBaseline } from "@mui/material";
 import Homepage from "./container/homepage/index2";
 import Passport from "./aequm/Aequm";
 import App from "./container/passport/Page";
+import * as faceapi from "face-api.js";
 
 export default function index() {
   return (
@@ -27,16 +28,14 @@ export default function index() {
     </Fragment>
   );
 }
-// import * as faceapi from "face-api.js";
-// import React from "react";
 
 // function App() {
 //   const [modelsLoaded, setModelsLoaded] = React.useState(false);
 //   const [captureVideo, setCaptureVideo] = React.useState(false);
 //   const [image, setImage] = React.useState("");
 //   const videoRef = React.useRef();
-//   const videoHeight = 480;
-//   const videoWidth = 640;
+//   const videoHeight = 1080;
+//   const videoWidth = 1920;
 //   const canvasRef = React.useRef();
 
 //   React.useEffect(() => {
@@ -56,7 +55,7 @@ export default function index() {
 //   const startVideo = () => {
 //     setCaptureVideo(true);
 //     navigator.mediaDevices
-//       .getUserMedia({ video: { width: 300 } })
+//       .getUserMedia({ video: { width: videoWidth, height: videoHeight } })
 //       .then((stream) => {
 //         let video = videoRef.current;
 //         video.srcObject = stream;
@@ -163,6 +162,8 @@ export default function index() {
 //                 display: "flex",
 //                 justifyContent: "center",
 //                 padding: "10px",
+//                 maxHeight: "70vh",
+//                 maxWidth: "100vw",
 //               }}
 //             >
 //               <video
@@ -170,9 +171,20 @@ export default function index() {
 //                 height={videoHeight}
 //                 width={videoWidth}
 //                 onPlay={handleVideoOnPlay}
-//                 style={{ borderRadius: "10px" }}
+//                 style={{
+//                   borderRadius: "10px",
+//                   maxHeight: "70vh",
+//                   maxWidth: "100vw",
+//                 }}
 //               />
-//               <canvas ref={canvasRef} style={{ position: "absolute" }} />
+//               <canvas
+//                 ref={canvasRef}
+//                 style={{
+//                   position: "absolute",
+//                   maxHeight: "70vh",
+//                   maxWidth: "100vw",
+//                 }}
+//               />
 //             </div>
 //           </div>
 //         ) : (
@@ -191,12 +203,20 @@ export default function index() {
 //           border: "none",
 //           borderRadius: "10px",
 //         }}
-//         onClick={() => console.log(canvasRef.current)}
+//         onClick={() => {
+//           canvasRef.current
+//             .getContext("2d")
+//             .drawImage(videoRef.current, 0, 0, videoWidth, videoHeight);
+//           let image_data_url = canvasRef.current.toDataURL("image/png");
+//           closeWebcam();
+//           canvasRef.current.innerHTML = image_data_url;
+
+//           // data url of the image
+//           console.log(image_data_url);
+//         }}
 //       >
 //         Capture
 //       </button>
 //     </div>
 //   );
 // }
-
-// export default App;
