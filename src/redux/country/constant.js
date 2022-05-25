@@ -3,8 +3,8 @@ export const UK = "UK";
 export const SET_COUNTRY = "SET_COUNTRY";
 export const SET_REQUIREMENT = "SET_REQUIREMENT";
 export const USAParams = {
-  height: 720,
-  width: 1080,
+  height: 1080,
+  width: 1920,
   faceHeight: 0.69,
   faceWidth: 0.5,
 };
