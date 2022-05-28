@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.Label {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.icon {
+  background-color: rgb(78, 107, 224);
+  height: 50px;
+  width: 50px;
+  color: white;
+  border-radius: 10px;
+}
+
+.LabelTag {
+  font-size: 20px;
+  font-weight: bold;
+}

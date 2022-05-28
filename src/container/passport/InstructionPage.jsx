@@ -1,7 +1,10 @@
-import { Box, Grid, Typography } from "@mui/material";
-import React from "react";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { useSelector } from "react-redux";
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+import HdIcon from "@mui/icons-material/Hd";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   box1: {
@@ -19,38 +22,88 @@ const useStyles = makeStyles((theme) => ({
 
 function InstructionPage() {
   const classes = useStyles();
+  const [page, setPage] = useState(0);
   const state = useSelector((state) => state.store);
+  return <Box>{page == 0 && <PassportRequirements />}</Box>;
+}
+
+function PassportRequirements() {
   return (
-    <Box className={classes.box1}>
-      <Box>
-        <Typography variant="h6">
-          Country : <span style={{ color: "red" }}>{state.country}</span>
-        </Typography>
-        <Typography variant="h6">
-          Requirement :<span style={{ color: "red" }}>{state.requirement}</span>
-        </Typography>
-      </Box>
-      <Typography variant="h4">Instructions</Typography>
-      <Grid container>
-        <Grid item className={classes.instruction} sm={12}>
-          1. Stand in Well LIT Area for clear Photos.
+    <Box>
+      <h4>US passport photo - Size & Requirements</h4>
+      <Stack direction="row" sx={{ marginTop: 5 }}>
+        <Grid container columnSpacing={10} rowSpacing={10}>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <AspectRatioIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">Size</Box>
+                <Box>Width : 2in </Box>
+                <Box>Height : 2in </Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <HdIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">Resolution</Box>
+                <Box>300dpi </Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <AccountCircleIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">Image definition parameters</Box>
+                <Box>
+                  Head height: 1.29 in Bottom of the Photo to the Eye Line: 1.18
+                  in
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <AccountCircleIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">
+                  Is it suitable for online submission?
+                </Box>
+                <Box>Yes</Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <AccountCircleIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">Is it printable? </Box>
+                <Box>Yes</Box>
+              </Box>
+            </Box>
+          </Grid>
+          <Grid item sm={6}>
+            <Box className="Label">
+              <AccountCircleIcon fontSize="large" className="icon" />
+              <Box>
+                <Box className="LabelTag">Background Color</Box>
+                <Box
+                  sx={{
+                    height: "30px",
+                    width: "50px",
+                    backgroundColor: "white",
+                    border: "2px solid black",
+                  }}
+                ></Box>
+              </Box>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item className={classes.instruction} sm={12}>
-          2. Clean your camera berfore usage.
-        </Grid>
-        <Grid item className={classes.instruction} sm={12}>
-          3. Make Sure your face is visible completly
-        </Grid>
-        <Grid item className={classes.instruction} sm={12}>
-          4. Keep your background clear from objects.
-        </Grid>
-        <Grid item className={classes.instruction} sm={12}>
-          5. For succesful attempt please follow photo instructions for visa and
-          passport.
-        </Grid>
-      </Grid>
+        <img src="images/reqImage.png" />
+      </Stack>
     </Box>
   );
 }
-
 export default InstructionPage;

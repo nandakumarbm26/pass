@@ -15,14 +15,21 @@ function Page() {
   const webRef = useRef();
   const state = useSelector((state) => state.store);
   const dispatch = useDispatch();
+  const [terms, setTerms] = useState(false);
+  const termsAccepted = (data) => {
+    if (data == true) {
+    }
+  };
   return (
     <div>
       <Box sx={{ minHeight: "90vh", width: "100vw" }}>
-        {page === 0 && <Page1 />}
+        {page === 0 && <Page1 termsAccepted={termsAccepted} />}
         {page === 1 && <Page2 />}
         {page === 2 && <Centerpane webRef={webRef} />}
         {page === 3 && <Page4 />}
       </Box>
+      {/* <label >Accept Terms of Use.</label> */}
+      <input type="checkbox" value={true} />
       <Box
         sx={{
           minHeight: "5vh",
@@ -33,15 +40,17 @@ function Page() {
           flexDirection: "row",
         }}
       >
-        <Button
-          size="large"
-          variant="contained"
-          disabled={page === 0}
-          sx={{ width: "10vw" }}
-          onClick={() => page > 0 && setPage(page - 1)}
-        >
-          Previous
-        </Button>
+        {page != 0 && (
+          <Button
+            size="large"
+            variant="contained"
+            disabled={page === 0}
+            sx={{ width: "10vw" }}
+            onClick={() => page > 0 && setPage(page - 1)}
+          >
+            Previous
+          </Button>
+        )}
         <Button
           size="large"
           variant="contained"
@@ -75,6 +84,7 @@ function Page2() {
     dispatch(setRequiremnets(requirementRef.current.value));
     console.log(requirementRef.current.value);
   };
+  const data = [1, 2, 3, 4, 5, 6];
   return (
     <div style={{ width: "75vw", margin: "auto" }}>
       <Grid
@@ -94,7 +104,7 @@ function Page2() {
               onChange={countryUpdate}
             >
               <option value="US">United States of America</option>
-              <option value="UK">United Kingdom</option>
+              {/* <option value="UK">United Kingdom</option> */}
             </select>
           </h4>
         </Grid>
@@ -115,6 +125,16 @@ function Page2() {
             </select>
           </h4>
         </Grid>
+      </Grid>
+
+      <Grid container sx={{ height: "65vh", justifyContent: "center" }}>
+        {data.map((d, index) => {
+          return (
+            <Grid item sm={4}>
+              <img src={`images/instruction${d}.png`} height={250} />
+            </Grid>
+          );
+        })}
       </Grid>
     </div>
   );

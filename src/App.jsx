@@ -6,7 +6,7 @@ import { CssBaseline } from "@mui/material";
 import Homepage from "./container/homepage/index2";
 import Passport from "./aequm/Aequm";
 import App from "./container/passport/Page";
-
+import "./index.css";
 export default function index() {
   return (
     <Fragment>

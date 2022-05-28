@@ -48,6 +48,16 @@ function Capture({ webRef }) {
           boxSizing: "border-box",
           width: `${state.countryParams.faceWidth * 100}%`,
           border: "10px solid lime",
+          borderRadius: "600px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          borderLeft: "5px solid lime",
+          minHeight: "100%",
+          position: "absolute",
+          top: "0%",
+          left: "50%",
         }}
       ></Box>
     </Box>

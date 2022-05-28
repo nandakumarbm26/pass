@@ -79,7 +79,7 @@ function Centerpane({ height, webRef, status }) {
         variant="contained"
         sx={{ width: "20%", margin: "auto" }}
         startIcon={<CameraAltOutlined />}
-        disabled={!state.faceStats}
+        disabled={!state.faceStats && !state.faceSmile}
         onClick={() => {
           state.photo == "" ? capture() : reCapture();
         }}
@@ -92,6 +92,10 @@ function Centerpane({ height, webRef, status }) {
         ) : (
           <img src={"data:image/png;base64," + state.photo} />
         )}
+      </Box>
+      <Box sx={{ textAlign: "center", color: "red", backgroundColor: "#fdd" }}>
+        place your face inside the grid and use reference line to keep your face
+        straight
       </Box>
       {/* <Grid
         container

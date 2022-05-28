@@ -1,4 +1,4 @@
-import { USA, UK, SET_COUNTRY, SET_REQUIREMENT } from "./constant";
+import { USA, UK, SET_COUNTRY, SET_REQUIREMENT, FACE_SMILE } from "./constant";
 import {
   USAParams,
   UKParams,
@@ -21,6 +21,7 @@ const initialState = {
   faceStats: false,
   loading: false,
   processedPhoto: "",
+  faceSmile: false,
 };
 
 export default function store(state = initialState, action) {
@@ -69,6 +70,12 @@ export default function store(state = initialState, action) {
       return {
         ...state,
         faceStats: action.params.req,
+      };
+    }
+    case FACE_SMILE: {
+      return {
+        ...state,
+        faceSmile: action.params.req,
       };
     }
     case LOADING: {

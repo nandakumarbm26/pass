@@ -30,3 +30,6 @@ export const cameraReq = (req) => async (dispatch) => {
 export const faceStats = (req) => async (dispatch) => {
   dispatch({ type: FACE_STATS, params: { req: req } });
 };
+export const faceSmile = (req) => async (dispatch) => {
+  dispatch({ type: FACE_STATS, params: { req: req } });
+};

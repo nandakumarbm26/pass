@@ -20,3 +20,4 @@ export const SET_PHOTO = "SET_PHOTO";
 export const CAMERA_REQ = "CAMERA_REQ";
 export const LOADING = "LOADING";
 export const FACE_STATS = "FACE_STATS";
+export const FACE_SMILE = "FACE_SMILE";

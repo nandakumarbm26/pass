@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { faceStats, cameraReq } from "../redux/country/action";
+import { faceStats, cameraReq, faceSmile } from "../redux/country/action";
 import ReactDOM from "react-dom";
 import * as faceapi from "face-api.js";
 import React, { useEffect, useRef } from "react";
@@ -110,11 +110,15 @@ function App() {
           dispatch(faceStats(false));
         }
         try {
-          resizedDetections[0].expressions.neutral < 0.7
-            ? setSmile(true)
-            : setSmile(false);
+          if (resizedDetections[0].expressions.neutral < 0.7) {
+            setSmile(true);
+            dispatch(faceSmile(true));
+          } else {
+            dispatch(faceSmile(false));
+            setSmile(false);
+          }
         } catch (e) {
-          dispatch(faceStats(false));
+          dispatch(faceSmile(true));
         }
         // console.log(
         //   resizedDetections[0].landmarks._positions[16].x -
@@ -126,12 +130,17 @@ function App() {
               resizedDetections[0].landmarks._positions[8].y) /
             (resizedDetections[0].landmarks._positions[27].x -
               resizedDetections[0].landmarks._positions[8].x);
-          if (slope < -65 || slope > 65) {
+          if (slope < -25 || slope > 25) {
             setBent(false);
+            dispatch(faceSmile(true));
           } else {
+            dispatch(faceSmile(false));
             setBent(true);
           }
-        } catch (e) {}
+        } catch (e) {
+          dispatch(faceSmile(false));
+          setBent(true);
+        }
       }
     }, 100);
   };
@@ -143,17 +152,13 @@ function App() {
   };
 
   return (
-    <div style={{ position: "absolute", top: "0" }}>
+    <div style={{ position: "absolute", bottom: "10%", left: "35%" }}>
       {smile && (
-        <Alert id="alert" severity="warning">
+        <Alert severity="error">
           expression should be neutral. do not smile
         </Alert>
       )}
-      {bent && (
-        <Alert id="alert" severity="warning">
-          face should be straight
-        </Alert>
-      )}
+      {bent && <Alert severity="error">face should be straight</Alert>}
       <div style={{ display: "none" }}>
         {captureVideo ? (
           modelsLoaded ? (
