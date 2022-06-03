@@ -29,7 +29,7 @@ function Page() {
         {page === 3 && <Page4 />}
       </Box>
       {/* <label >Accept Terms of Use.</label> */}
-      <input type="checkbox" value={true} />
+      {/* <input type="checkbox" value={true} /> */}
       <Box
         sx={{
           minHeight: "5vh",
@@ -127,7 +127,14 @@ function Page2() {
         </Grid>
       </Grid>
 
-      <Grid container sx={{ height: "65vh", justifyContent: "center" }}>
+      <Grid
+        container
+        sx={{
+          height: "65vh",
+          justifyContent: "center",
+          overflow: { xs: "scroll", sm: "hidden" },
+        }}
+      >
         {data.map((d, index) => {
           return (
             <Grid item sm={4}>

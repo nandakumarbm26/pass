@@ -31,9 +31,9 @@ function PassportRequirements() {
   return (
     <Box>
       <h4>US passport photo - Size & Requirements</h4>
-      <Stack direction="row" sx={{ marginTop: 5 }}>
+      <Stack direction={{ xs: "column", sm: "row" }} sx={{ marginTop: 5 }}>
         <Grid container columnSpacing={10} rowSpacing={10}>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <AspectRatioIcon fontSize="large" className="icon" />
               <Box>
@@ -43,7 +43,7 @@ function PassportRequirements() {
               </Box>
             </Box>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <HdIcon fontSize="large" className="icon" />
               <Box>
@@ -52,7 +52,7 @@ function PassportRequirements() {
               </Box>
             </Box>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <AccountCircleIcon fontSize="large" className="icon" />
               <Box>
@@ -64,7 +64,7 @@ function PassportRequirements() {
               </Box>
             </Box>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <AccountCircleIcon fontSize="large" className="icon" />
               <Box>
@@ -75,7 +75,7 @@ function PassportRequirements() {
               </Box>
             </Box>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <AccountCircleIcon fontSize="large" className="icon" />
               <Box>
@@ -84,7 +84,7 @@ function PassportRequirements() {
               </Box>
             </Box>
           </Grid>
-          <Grid item sm={6}>
+          <Grid item sm={6} xs={12}>
             <Box className="Label">
               <AccountCircleIcon fontSize="large" className="icon" />
               <Box>

@@ -77,7 +77,7 @@ function Centerpane({ height, webRef, status }) {
       {" "}
       <Button
         variant="contained"
-        sx={{ width: "20%", margin: "auto" }}
+        sx={{ width: { sm: "20%", xs: "40%" }, margin: "auto" }}
         startIcon={<CameraAltOutlined />}
         disabled={!state.faceStats && !state.faceSmile}
         onClick={() => {

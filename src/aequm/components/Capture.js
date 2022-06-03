@@ -47,13 +47,15 @@ function Capture({ webRef }) {
           minHeight: `${state.countryParams.faceHeight * 100}%`,
           boxSizing: "border-box",
           width: `${state.countryParams.faceWidth * 100}%`,
-          border: "10px solid lime",
-          borderRadius: "600px",
+          border: "10px solid black",
+          borderTopLeftRadius: "600px",
+          borderTopRightRadius: "600px",
+          display: { xs: "none", sm: "block" },
         }}
       ></Box>
       <Box
         sx={{
-          borderLeft: "5px solid lime",
+          borderLeft: { xs: "1px solid black", sm: "5px solid black" },
           minHeight: "100%",
           position: "absolute",
           top: "0%",
