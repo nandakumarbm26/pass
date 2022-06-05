@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
 import Webcam from "react-webcam";
 import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,16 +17,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Capture({ webRef }) {
+  const [facingMode, setFacingMode] = useState("user");
   const state = useSelector((state) => state.store);
   const classes = useStyles();
   const videoConstraints = {
     width: state.countryParams.width,
     height: state.countryParams.height,
+    facingMode: { exact: `${facingMode}` },
   };
   const margin = `0% ${((1 - state.countryParams.faceWidth) / 2) * 100}%`;
 
   return (
     <Box sx={{ position: "relative" }}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={() => {
+          if (facingMode === "user") setFacingMode("environment");
+          else setFacingMode("user");
+        }}
+      >
+        FacingMode
+      </Button>
       <Webcam
         ref={webRef}
         imageSmoothing={true}

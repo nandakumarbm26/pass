@@ -7,6 +7,7 @@ import {
   setRequiremnets,
   getCountryParams,
   setProcessedPhoto,
+  setPhoto,
 } from "./../../redux/country/action";
 import axios from "axios";
 
@@ -154,22 +155,28 @@ function Page4() {
   const [loading, setLoading] = useState("false");
   const process = () => {
     setLoading(true);
+    // https://gapi.aequmindia.in/api/passport
     if (state.photo !== "")
       axios
-        .post("https://gapi.aequmindia.in/api/passport", {
+        .post("http://localhost:5050/passport", {
           face: state.photo,
           country: state.country,
         })
         .then((res) => {
           console.log(res.data);
           dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
-          if (res.data["status"]) {
+          if (res.data["spectacles"]) {
             alert("Please remove specs and retake photo.");
             dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
           }
           if (res.data["shadow"]) {
             setShadow(true);
           }
+          if (res.data["mouthopen"]) {
+            alert("Mouth is open retake photo.");
+            dispatch(setPhoto(""));
+          }
+
           setLoading(false);
         });
   };

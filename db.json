@@ -1,0 +1,55 @@
+{
+  "profile": {
+    "name": "",
+    "age": "",
+    "gender": "",
+    "email": "",
+    "phone": "",
+    "parentid": "",
+    "department": "",
+    "branch": "",
+    "yearofjoining": "",
+    "currentyearofstudy": "",
+    "vtuscheme": ""
+  },
+  "academics": {
+    "enrolledcourses": {
+      "semone": [
+        {
+          "code": "",
+          "credits": "",
+          "facultyincharge": "",
+          "iamarks": {
+            "ia1": "",
+            "ia2": "",
+            "ia3": ""
+          }
+        },
+        {
+          "code": "",
+          "credits": "",
+          "facultyincharge": "",
+          "iamarks": {
+            "ia1": "",
+            "ia2": "",
+            "ia3": ""
+          }
+        }
+      ],
+      "semtwo": [],
+      "semthree": [],
+      "semfour": [],
+      "semfive": [],
+      "semsix": [],
+      "semseven": [],
+      "semeight": []
+    },
+    "arears": {
+      "subject1": {}
+    }
+  },
+  "mentor": {
+    "mentorid": "",
+    "remarks": [{ "date": "", "comment": "" }]
+  }
+}
