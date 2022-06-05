@@ -15,7 +15,7 @@ export const UKParams = {
   faceWidth: 0.8285,
   faceHeight: 0.755555,
 };
-
+export const CAMERA_FACE = "CAMERA_FACE";
 export const SET_PHOTO = "SET_PHOTO";
 export const CAMERA_REQ = "CAMERA_REQ";
 export const LOADING = "LOADING";

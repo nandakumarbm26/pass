@@ -7,6 +7,7 @@ import {
   SET_REQUIREMENT,
   FACE_STATS,
   PROCESS_PHOTO,
+  CAMERA_FACE,
 } from "./constant";
 
 export const getCountryParams = (country) => async (dispatch) => {
@@ -32,4 +33,7 @@ export const faceStats = (req) => async (dispatch) => {
 };
 export const faceSmile = (req) => async (dispatch) => {
   dispatch({ type: FACE_STATS, params: { req: req } });
+};
+export const cameraFace = (req) => async (dispatch) => {
+  dispatch({ type: CAMERA_FACE, params: { req: req } });
 };

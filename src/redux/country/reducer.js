@@ -7,6 +7,7 @@ import {
   SET_PHOTO,
   CAMERA_REQ,
   PROCESS_PHOTO,
+  CAMERA_FACE,
 } from "./constant";
 import { getCountryParams } from "./action";
 
@@ -22,6 +23,7 @@ const initialState = {
   loading: false,
   processedPhoto: "",
   faceSmile: false,
+  cameraFace: "user",
 };
 
 export default function store(state = initialState, action) {
@@ -64,6 +66,12 @@ export default function store(state = initialState, action) {
       return {
         ...state,
         cameraReq: action.params.req,
+      };
+    }
+    case CAMERA_FACE: {
+      return {
+        ...state,
+        cameraFace: action.params.req,
       };
     }
     case FACE_STATS: {

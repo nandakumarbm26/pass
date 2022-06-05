@@ -33,10 +33,17 @@ function App() {
     startVideo();
   }, []);
 
+  useEffect(startVideo(), [state.cameraFace]);
+
   const startVideo = () => {
     setCaptureVideo(true);
     navigator.mediaDevices
-      .getUserMedia({ video: { width: videoWidth, height: videoHeight } })
+      .getUserMedia({
+        video: { width: videoWidth, height: videoHeight },
+        facingMode: {
+          exact: `${state.cameraFace}`,
+        },
+      })
       .then((stream) => {
         let video = videoRef.current;
         video.srcObject = stream;

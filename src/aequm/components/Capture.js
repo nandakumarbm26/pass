@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import * as faceapi from "face-api.js";
 import App from "../../component/FaceDetector";
-import { captureVideo } from "../../redux/country/action";
+import { cameraFace, captureVideo } from "../../redux/country/action";
 const useStyles = makeStyles((theme) => ({
   camerasm: {
     height: "70vh",
@@ -17,24 +17,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Capture({ webRef }) {
-  const [facingMode, setFacingMode] = useState("user");
+  const dispatch = useDispatch();
+  // const [facingMode, setFacingMode] = useState("user");
   const state = useSelector((state) => state.store);
   const classes = useStyles();
   const videoConstraints = {
     width: state.countryParams.width,
     height: state.countryParams.height,
-    facingMode: { exact: `${facingMode}` },
+    facingMode: { exact: `${state.cameraFace}` },
   };
   const margin = `0% ${((1 - state.countryParams.faceWidth) / 2) * 100}%`;
-
+  useEffect(() => {}, [state.cameraFace]);
   return (
     <Box sx={{ position: "relative" }}>
       <Button
         color="primary"
         variant="contained"
         onClick={() => {
-          if (facingMode === "user") setFacingMode("environment");
-          else setFacingMode("user");
+          if (facingMode === "user") dispatch(cameraFace("environment"));
+          else dispatch(cameraFace("user"));
         }}
       >
         FacingMode
