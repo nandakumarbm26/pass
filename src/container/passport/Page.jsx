@@ -8,11 +8,12 @@ import {
   getCountryParams,
   setProcessedPhoto,
   setPhoto,
+  setPage,
 } from "./../../redux/country/action";
 import axios from "axios";
 
 function Page() {
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
   const webRef = useRef();
   const state = useSelector((state) => state.store);
   const dispatch = useDispatch();
@@ -24,12 +25,12 @@ function Page() {
   return (
     <div>
       <Box sx={{ minHeight: "90vh", width: "100vw" }}>
-        {page === 0 && <Page1 termsAccepted={termsAccepted} />}
-        {page === 1 && <Page2 />}
-        {page === 2 && <Centerpane webRef={webRef} />}
-        {page === 3 && <Page4 />}
+        {state.page === 0 && <Page1 termsAccepted={termsAccepted} />}
+        {state.page === 1 && <Page2 />}
+        {state.page === 2 && <Centerpane webRef={webRef} />}
+        {state.page === 3 && <Page4 />}
       </Box>
-      {/* <label >Accept Terms of Use.</label> */}
+      {/* <label >Accept state.Terms of Use.</label> */}
       {/* <input type="checkbox" value={true} /> */}
       <Box
         sx={{
@@ -41,13 +42,13 @@ function Page() {
           flexDirection: "row",
         }}
       >
-        {page != 0 && (
+        {state.page != 0 && (
           <Button
             size="large"
             variant="contained"
-            disabled={page === 0}
+            disabled={state.page === 0}
             sx={{ width: "10vw" }}
-            onClick={() => page > 0 && setPage(page - 1)}
+            onClick={() => state.page > 0 && dispatch(setPage(state.page - 1))}
           >
             Previous
           </Button>
@@ -56,8 +57,10 @@ function Page() {
           size="large"
           variant="contained"
           sx={{ width: "10vw" }}
-          disabled={page === 3 || (page === 2 && state.photo === "")}
-          onClick={() => page <= 3 && setPage(page + 1)}
+          disabled={
+            state.page === 3 || (state.page === 2 && state.photo === "")
+          }
+          onClick={() => state.page <= 3 && dispatch(setPage(state.page + 1))}
         >
           Next
         </Button>
@@ -158,26 +161,40 @@ function Page4() {
     // https://gapi.aequmindia.in/api/passport
     if (state.photo !== "")
       axios
-        .post("http://localhost:5050/passport", {
+        .post("https://gapi.aequmindia.in/api/passport", {
           face: state.photo,
           country: state.country,
         })
         .then((res) => {
-          console.log(res.data);
-          dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
-          if (res.data["spectacles"]) {
-            alert("Please remove specs and retake photo.");
+          try {
             dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
-          }
-          if (res.data["shadow"]) {
-            setShadow(true);
-          }
-          if (res.data["mouthopen"]) {
-            alert("Mouth is open retake photo.");
-            dispatch(setPhoto(""));
-          }
+            if (res.data["spectacles"]) {
+              alert("Please remove specs and retake photo.");
+              // dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
+              dispatch(setPhoto(""));
+              dispatch(setPage(2));
+            }
+            if (res.data["shadow"]) {
+              setShadow(true);
+            }
+            if (res.data["mouthopen"]) {
+              alert("Mouth is open retake photo.");
+              dispatch(setPhoto(""));
+              dispatch(setPage(2));
+            }
 
-          setLoading(false);
+            setLoading(false);
+          } catch {}
+          try {
+            if (res.data["error"]) {
+              alert(
+                "Snap! error occured at server. we are working on it. try again. if the issues persists report to admin"
+              );
+              dispatch(setPhoto(""));
+              dispatch(setPage(2));
+            }
+          } catch {}
+          console.log(res);
         });
   };
   useEffect(process, []);

@@ -33,7 +33,7 @@ function App() {
     startVideo();
   }, []);
 
-  useEffect(startVideo(), [state.cameraFace]);
+  // useEffect(startVideo(), [state.cameraFace]);
 
   const startVideo = () => {
     setCaptureVideo(true);

@@ -7,6 +7,7 @@ import {
   SET_REQUIREMENT,
   FACE_STATS,
   PROCESS_PHOTO,
+  SET_PAGE,
   CAMERA_FACE,
 } from "./constant";
 
@@ -36,4 +37,7 @@ export const faceSmile = (req) => async (dispatch) => {
 };
 export const cameraFace = (req) => async (dispatch) => {
   dispatch({ type: CAMERA_FACE, params: { req: req } });
+};
+export const setPage = (req) => async (dispatch) => {
+  dispatch({ type: SET_PAGE, params: { req: req } });
 };

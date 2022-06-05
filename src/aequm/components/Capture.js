@@ -34,8 +34,9 @@ function Capture({ webRef }) {
         color="primary"
         variant="contained"
         onClick={() => {
-          if (facingMode === "user") dispatch(cameraFace("environment"));
+          if (state.cameraFace === "user") dispatch(cameraFace("environment"));
           else dispatch(cameraFace("user"));
+          console.log(state);
         }}
       >
         FacingMode
