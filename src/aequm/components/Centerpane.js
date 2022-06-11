@@ -63,6 +63,7 @@ function Centerpane({ height, webRef, status }) {
     // setFace(webRef.current.getScreenshot().split(",")[1]);
     dispatch(setPhoto(webRef.current.getScreenshot().split(",")[1]));
     dispatch(cameraReq(false));
+    console.log(webRef.current.getScreenshot());
   };
 
   return (

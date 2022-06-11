@@ -22,7 +22,8 @@ const initialState = {
   captureVideo: true,
   faceStats: false,
   loading: false,
-  processedPhoto: "",
+  processedPhotoHD: "",
+  processedPhotoSD: "",
   faceSmile: false,
   cameraFace: "user",
   page: 0,
@@ -62,7 +63,8 @@ export default function store(state = initialState, action) {
     case PROCESS_PHOTO: {
       return {
         ...state,
-        processedPhoto: action.params.image,
+        processedPhotoHD: action.params.image.hd,
+        processedPhotoSD: action.params.image.sd,
       };
     }
 

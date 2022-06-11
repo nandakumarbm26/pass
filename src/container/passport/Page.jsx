@@ -1,7 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import Centerpane from "../../aequm/components/Centerpane";
 import InstructionPage from "./InstructionPage";
-import { Box, Button, CircularProgress, Grid, Alert } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Alert,
+  Stack,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setRequiremnets,
@@ -156,6 +163,32 @@ function Page4() {
   const dispatch = useDispatch();
   const [shadow, setShadow] = useState(false);
   const [loading, setLoading] = useState("false");
+  const [image, setImage] = useState("");
+  const toDataURL = (url) =>
+    fetch(url)
+      .then((response) => response.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          })
+      );
+
+  function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+
   const process = () => {
     setLoading(true);
     // https://gapi.aequmindia.in/api/passport
@@ -167,7 +200,12 @@ function Page4() {
         })
         .then((res) => {
           try {
-            dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
+            dispatch(
+              setProcessedPhoto({
+                hd: res.data["image"].split("'")[1],
+                sd: res.data["imageSd"].split("'")[1],
+              })
+            );
             if (res.data["spectacles"]) {
               alert("Please remove specs and retake photo.");
               // dispatch(setProcessedPhoto(res.data["image"].split("'")[1]));
@@ -195,6 +233,11 @@ function Page4() {
             }
           } catch {}
           console.log(res);
+        })
+        .then(async () => {
+          toDataURL("https://gapi.aequmindia.in/api/download").then((data) =>
+            setImage(data)
+          );
         });
   };
   useEffect(process, []);
@@ -217,24 +260,44 @@ function Page4() {
             </Alert>
           )}
           <img
-            src={"data:image/jpeg;base64," + state.processedPhoto}
+            src={"data:image/jpeg;base64," + state.processedPhotoHD}
             height={400}
             width={400}
           />
-          <a
-            href={"data:image/jpeg;base64," + state.processedPhoto}
-            download="myimage.jpg"
-            style={{ display: "none" }}
-            id="download"
-          >
-            Download
-          </a>
-          <Button
-            variant="contained"
-            onClick={() => document.getElementById("download").click()}
-          >
-            Download
-          </Button>
+          <Stack direction="row">
+            <Box>
+              <a
+                href={"data:image/jpeg;base64," + state.processedPhotoHD}
+                download="myimage.jpeg"
+                style={{ display: "none" }}
+                id="download"
+              >
+                Download HD
+              </a>
+              <Button
+                variant="contained"
+                onClick={() => document.getElementById("download").click()}
+              >
+                Download HD
+              </Button>
+            </Box>
+            <Box>
+              <a
+                href={`${image}`}
+                download="myimage.jpg"
+                style={{ display: "none" }}
+                id="downloadSD"
+              >
+                Download print photo
+              </a>
+              <Button
+                variant="contained"
+                onClick={() => document.getElementById("downloadSD").click()}
+              >
+                Download print photo
+              </Button>
+            </Box>
+          </Stack>
         </Box>
       )}
     </div>
