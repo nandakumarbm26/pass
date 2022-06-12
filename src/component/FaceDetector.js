@@ -14,6 +14,7 @@ function App() {
   const [captureVideo, setCaptureVideo] = React.useState(false);
   const [smile, setSmile] = React.useState(false);
   const [bent, setBent] = React.useState(false);
+  const [firstLoad, setFirstLoad] = React.useState(true);
   const videoRef = React.useRef();
   const videoHeight = state.countryParams.height;
   const videoWidth = state.countryParams.width;
@@ -31,6 +32,7 @@ function App() {
     };
     loadModels();
     startVideo();
+    setFirstLoad(false);
   }, []);
 
   // useEffect(startVideo(), [state.cameraFace]);
@@ -53,6 +55,13 @@ function App() {
         console.error("error:", err);
       });
   };
+  useEffect(() => {
+    if (!firstLoad) {
+      closeWebcam();
+      console.log(state.cameraFace);
+      startVideo();
+    }
+  }, [state.cameraFace]);
 
   const constraints = {
     xstart:
@@ -153,6 +162,7 @@ function App() {
   };
 
   const closeWebcam = () => {
+    console.log("close cam");
     videoRef.current.pause();
     videoRef.current.srcObject.getTracks()[0].stop();
     setCaptureVideo(false);

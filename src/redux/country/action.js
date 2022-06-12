@@ -9,6 +9,7 @@ import {
   PROCESS_PHOTO,
   SET_PAGE,
   CAMERA_FACE,
+  CAMERA_DIRECTION,
 } from "./constant";
 
 export const getCountryParams = (country) => async (dispatch) => {

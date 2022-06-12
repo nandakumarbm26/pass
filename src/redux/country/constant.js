@@ -22,3 +22,4 @@ export const CAMERA_REQ = "CAMERA_REQ";
 export const LOADING = "LOADING";
 export const FACE_STATS = "FACE_STATS";
 export const FACE_SMILE = "FACE_SMILE";
+export const CAMERA_DIRECTION = "CAMERA_DIRECTION";

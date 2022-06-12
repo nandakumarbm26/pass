@@ -9,6 +9,7 @@ import {
   PROCESS_PHOTO,
   CAMERA_FACE,
   SET_PAGE,
+  CAMERA_DIRECTION,
 } from "./constant";
 import { getCountryParams } from "./action";
 
@@ -17,6 +18,7 @@ const initialState = {
   countryParams: {
     ...USAParams,
   },
+  cameraDirection: "user",
   requirement: "passport",
   photo: "",
   captureVideo: true,
@@ -76,6 +78,12 @@ export default function store(state = initialState, action) {
       return {
         ...state,
         cameraReq: action.params.req,
+      };
+    }
+    case CAMERA_DIRECTION: {
+      return {
+        ...state,
+        cameraDirection: action.params.req,
       };
     }
     case CAMERA_FACE: {
