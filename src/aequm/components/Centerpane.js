@@ -78,7 +78,11 @@ function Centerpane({ height, webRef, status }) {
       {" "}
       <Button
         variant="contained"
-        sx={{ width: { sm: "20%", xs: "40%" }, margin: "auto" }}
+        sx={{
+          width: { sm: "20%", xs: "40%" },
+          margin: "auto",
+          display: { xs: "none", sm: "block" },
+        }}
         startIcon={<CameraAltOutlined />}
         disabled={!state.faceStats && !state.faceSmile}
         onClick={() => {
@@ -87,7 +91,24 @@ function Centerpane({ height, webRef, status }) {
       >
         {state.photo == "" ? "Capture" : "Try again"}
       </Button>
-      <Box className={classes.border} style={{ width: "75vw", margin: "auto" }}>
+      <Button
+        variant="contained"
+        sx={{
+          width: { sm: "20%", xs: "40%" },
+          margin: "auto",
+          display: { xs: "block", sm: "none" },
+        }}
+        startIcon={<CameraAltOutlined />}
+        onClick={() => {
+          state.photo == "" ? capture() : reCapture();
+        }}
+      >
+        {state.photo == "" ? "Capture" : "Try again"}
+      </Button>
+      <Box
+        className={classes.border}
+        sx={{ width: { sm: "75vw", xs: "95vw" }, margin: "auto" }}
+      >
         {state.photo == "" ? (
           <Capture webRef={webRef} />
         ) : (

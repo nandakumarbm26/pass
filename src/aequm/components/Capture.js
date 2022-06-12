@@ -22,15 +22,15 @@ function Capture({ webRef }) {
   const state = useSelector((state) => state.store);
   const classes = useStyles();
   const videoConstraints = {
-    width: state.countryParams.width,
-    height: state.countryParams.height,
+    width: { min: 500, ideal: state.countryParams.width },
+    height: { min: 500, ideal: state.countryParams.height },
     facingMode: { exact: `${state.cameraFace}` },
   };
   const margin = `0% ${((1 - state.countryParams.faceWidth) / 2) * 100}%`;
   useEffect(() => {}, [state.cameraFace]);
   return (
     <Box sx={{ position: "relative" }}>
-      <Button
+      {/* <Button
         color="primary"
         variant="contained"
         onClick={() => {
@@ -40,7 +40,7 @@ function Capture({ webRef }) {
         }}
       >
         FacingMode
-      </Button>
+      </Button> */}
       <Webcam
         ref={webRef}
         imageSmoothing={true}
