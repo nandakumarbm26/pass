@@ -16,8 +16,10 @@ import {
   setProcessedPhoto,
   setPhoto,
   setPage,
+  setMode,
 } from "./../../redux/country/action";
 import axios from "axios";
+import { UploadFileRounded } from "@mui/icons-material";
 
 function Page() {
   // const [page, setPage] = useState(0);
@@ -34,7 +36,10 @@ function Page() {
       <Box sx={{ minHeight: "90vh", width: "100vw" }}>
         {state.page === 0 && <Page1 termsAccepted={termsAccepted} />}
         {state.page === 1 && <Page2 />}
-        {state.page === 2 && <Centerpane webRef={webRef} />}
+        {state.page === 2 && state.mode === "Camera" && (
+          <Centerpane webRef={webRef} />
+        )}
+        {state.page === 2 && state.mode === "Upload" && <Upload />}
         {state.page === 3 && <Page4 />}
       </Box>
       {/* <label >Accept state.Terms of Use.</label> */}
@@ -65,7 +70,9 @@ function Page() {
           variant="contained"
           sx={{ width: "10vw" }}
           disabled={
-            state.page === 3 || (state.page === 2 && state.photo === "")
+            state.page === 3 ||
+            (state.page === 1 && state.mode === "") ||
+            (state.page === 2 && state.photo === "")
           }
           onClick={() => state.page <= 3 && dispatch(setPage(state.page + 1))}
         >
@@ -75,7 +82,44 @@ function Page() {
     </div>
   );
 }
-
+function Upload() {
+  const state = useSelector((state) => state.store);
+  const dispatch = useDispatch();
+  const b64 = (image) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onload = () => {
+      dispatch(setPhoto(reader.result.split(",")[1]));
+    };
+  };
+  return (
+    <Box>
+      <Button
+        variant="contained"
+        color="black"
+        component="label"
+        fullWidth
+        startIcon={<UploadFileRounded />}
+        sx={{
+          color: "white",
+          width: "50%",
+          left: "25vw",
+          top: "47vh",
+          position: "absolute",
+        }}
+      >
+        Add photo
+        <input
+          onChange={(e) => {
+            b64(e.currentTarget.files[0]);
+          }}
+          type="file"
+          hidden
+        />
+      </Button>
+    </Box>
+  );
+}
 function Page1() {
   return (
     <div style={{ width: "75vw", margin: "auto" }}>
@@ -87,6 +131,7 @@ function Page2() {
   const dispatch = useDispatch();
   const countryRef = useRef();
   const requirementRef = useRef();
+  const modeRef = useRef();
   const countryUpdate = () => {
     dispatch(getCountryParams(countryRef.current.value));
   };
@@ -94,6 +139,11 @@ function Page2() {
   const updateRequirments = () => {
     dispatch(setRequiremnets(requirementRef.current.value));
     console.log(requirementRef.current.value);
+  };
+  const updateMode = () => {
+    dispatch(setMode(modeRef.current.value));
+    dispatch(setPhoto(""));
+    console.log(modeRef.current.value);
   };
   const data = [1, 2, 3, 4, 5, 6];
   return (
@@ -133,6 +183,17 @@ function Page2() {
               <option value="passport">Passport</option>
               <option value="visa">Visa</option>
               <option value="passport + visa">Passport + Visa</option>
+            </select>
+          </h4>
+        </Grid>
+        <Grid item sm={4} xs={12}>
+          <h5 className="semi-bold font__size--14 text__14-1024 color__gray-1">
+            Mode
+          </h5>
+          <h4 className="bold font__size--18 text__18-1024 text__18-xs mb-0">
+            <select ref={modeRef} id="Mode" name="Mode" onChange={updateMode}>
+              <option value="Upload">Upload</option>
+              <option value="Camera">Camera</option>
             </select>
           </h4>
         </Grid>

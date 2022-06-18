@@ -10,6 +10,7 @@ import {
   CAMERA_FACE,
   SET_PAGE,
   CAMERA_DIRECTION,
+  SET_MODE,
 } from "./constant";
 import { getCountryParams } from "./action";
 
@@ -29,6 +30,7 @@ const initialState = {
   faceSmile: false,
   cameraFace: "user",
   page: 0,
+  mode: "Upload",
 };
 
 export default function store(state = initialState, action) {
@@ -60,6 +62,12 @@ export default function store(state = initialState, action) {
       return {
         ...state,
         page: action.params.req,
+      };
+    }
+    case SET_MODE: {
+      return {
+        ...state,
+        mode: action.params.req,
       };
     }
     case PROCESS_PHOTO: {

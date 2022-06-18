@@ -23,3 +23,4 @@ export const LOADING = "LOADING";
 export const FACE_STATS = "FACE_STATS";
 export const FACE_SMILE = "FACE_SMILE";
 export const CAMERA_DIRECTION = "CAMERA_DIRECTION";
+export const SET_MODE = "SET_MODE";

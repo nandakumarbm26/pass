@@ -10,6 +10,7 @@ import {
   SET_PAGE,
   CAMERA_FACE,
   CAMERA_DIRECTION,
+  SET_MODE,
 } from "./constant";
 
 export const getCountryParams = (country) => async (dispatch) => {
@@ -19,6 +20,9 @@ export const getCountryParams = (country) => async (dispatch) => {
 
 export const setPhoto = (image) => async (dispatch) => {
   dispatch({ type: SET_PHOTO, params: { image: image } });
+};
+export const setMode = (req) => async (dispatch) => {
+  dispatch({ type: SET_MODE, params: { req: req } });
 };
 export const setProcessedPhoto = (image) => async (dispatch) => {
   dispatch({ type: PROCESS_PHOTO, params: { image: image } });
