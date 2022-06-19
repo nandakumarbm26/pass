@@ -286,10 +286,7 @@ function Page4() {
           } catch {}
           try {
             if (res.data["error"]) {
-              alert(
-                res.data["err"] +
-                  " Snap! error occured at server. we are working on it. try again. if the issues persists report to admin"
-              );
+              alert(res.data["err"]);
               dispatch(setPhoto(""));
               dispatch(setPage(2));
             }
