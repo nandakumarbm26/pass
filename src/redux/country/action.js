@@ -1,15 +1,11 @@
 import {
-  USA,
-  UK,
   SET_PHOTO,
   CAMERA_REQ,
-  SET_COUNTRY,
   SET_REQUIREMENT,
   FACE_STATS,
   PROCESS_PHOTO,
   SET_PAGE,
   CAMERA_FACE,
-  CAMERA_DIRECTION,
   SET_MODE,
 } from "./constant";
 

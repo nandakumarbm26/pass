@@ -1,4 +1,4 @@
-import { USA, UK, SET_COUNTRY, SET_REQUIREMENT, FACE_SMILE } from "./constant";
+import { USA, UK, SET_REQUIREMENT, FACE_SMILE } from "./constant";
 import {
   USAParams,
   UKParams,
@@ -12,7 +12,6 @@ import {
   CAMERA_DIRECTION,
   SET_MODE,
 } from "./constant";
-import { getCountryParams } from "./action";
 
 const initialState = {
   country: USA,
